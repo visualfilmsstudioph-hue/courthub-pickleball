@@ -350,6 +350,14 @@ export default function App() {
 
   // Mode: 'player' | 'owner'
   const [role, setRole] = useState('player');
+  const [isOwnerAuthenticated, setIsOwnerAuthenticated] = useState(
+    () => sessionStorage.getItem('courthub_owner_auth') === 'true'
+  );
+  const [showOwnerLoginModal, setShowOwnerLoginModal] = useState(false);
+  const [ownerUserInput, setOwnerUserInput] = useState('');
+  const [ownerPassInput, setOwnerPassInput] = useState('');
+  const [ownerLoginError, setOwnerLoginError] = useState('');
+
   const [courts, setCourts] = useState(INITIAL_COURTS);
   const [selectedCourtId, setSelectedCourtId] = useState(null);
 
@@ -358,6 +366,42 @@ export default function App() {
   const triggerToast = (message, type = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3500);
+  };
+
+  // Owner Login & Logout Handlers
+  const handleOwnerModeClick = () => {
+    if (isOwnerAuthenticated) {
+      setRole('owner');
+    } else {
+      setOwnerLoginError('');
+      setShowOwnerLoginModal(true);
+    }
+  };
+
+  const handleOwnerLoginSubmit = (e) => {
+    e.preventDefault();
+    if (
+      ownerUserInput.trim().toUpperCase() === 'JAYEM' &&
+      ownerPassInput === '123456789'
+    ) {
+      setIsOwnerAuthenticated(true);
+      sessionStorage.setItem('courthub_owner_auth', 'true');
+      setShowOwnerLoginModal(false);
+      setOwnerUserInput('');
+      setOwnerPassInput('');
+      setOwnerLoginError('');
+      setRole('owner');
+      triggerToast('Welcome back, JAYEM! App Owner Mode unlocked.');
+    } else {
+      setOwnerLoginError('Invalid Owner Username or Password.');
+    }
+  };
+
+  const handleOwnerLogout = () => {
+    setIsOwnerAuthenticated(false);
+    sessionStorage.removeItem('courthub_owner_auth');
+    setRole('player');
+    triggerToast('App Owner Mode locked.', 'info');
   };
 
   // Search & Filter States
@@ -1099,7 +1143,7 @@ export default function App() {
                 <span>Player View</span>
               </button>
               <button
-                onClick={() => setRole('owner')}
+                onClick={handleOwnerModeClick}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
                   role === 'owner'
                     ? 'bg-emerald-500 text-slate-950 shadow-md'
@@ -1164,20 +1208,28 @@ export default function App() {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-lime-400 shrink-0" />
                 <span>
-                  <strong>Owner Cloud Dashboard:</strong> Any pickleball court
-                  you add, feature, or edit is saved permanently to the cloud
-                  for all players.
+                  <strong>Owner Cloud Dashboard (Logged in as JAYEM):</strong>{' '}
+                  Any pickleball court you add, feature, or edit is saved
+                  permanently to the cloud for all players.
                 </span>
               </div>
-              <button
-                onClick={() => {
-                  setEditingCourt(null);
-                  setIsCourtModalOpen(true);
-                }}
-                className="underline font-bold text-lime-400 hover:text-lime-300"
-              >
-                + Add a Court Now
-              </button>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => {
+                    setEditingCourt(null);
+                    setIsCourtModalOpen(true);
+                  }}
+                  className="underline font-bold text-lime-400 hover:text-lime-300"
+                >
+                  + Add a Court Now
+                </button>
+                <button
+                  onClick={handleOwnerLogout}
+                  className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-xs font-bold text-rose-400 hover:bg-rose-500 hover:text-white transition-colors"
+                >
+                  Lock Owner Mode
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -1286,7 +1338,7 @@ export default function App() {
 
                     {role === 'player' ? (
                       <button
-                        onClick={() => setRole('owner')}
+                        onClick={handleOwnerModeClick}
                         className="text-xs font-semibold text-lime-400 hover:text-lime-300 flex items-center gap-1 bg-lime-400/10 px-3 py-2 rounded-xl border border-lime-400/20"
                       >
                         <ShieldCheck className="w-4 h-4" />
@@ -1666,6 +1718,88 @@ export default function App() {
           </>
         )}
       </main>
+
+      {/* OWNER LOGIN MODAL */}
+      {showOwnerLoginModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-black text-white">
+                    App Owner Login
+                  </h2>
+                  <p className="text-xs text-slate-400">
+                    Enter admin credentials to manage courts
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowOwnerLoginModal(false)}
+                className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleOwnerLoginSubmit} className="space-y-4">
+              <div>
+                <label className="text-xs font-bold text-slate-300 block mb-1.5">
+                  Owner Username
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={ownerUserInput}
+                  onChange={(e) => setOwnerUserInput(e.target.value)}
+                  placeholder="Enter username"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-lime-400"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-300 block mb-1.5">
+                  Owner Password
+                </label>
+                <input
+                  type="password"
+                  required
+                  value={ownerPassInput}
+                  onChange={(e) => setOwnerPassInput(e.target.value)}
+                  placeholder="Enter password"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-lime-400"
+                />
+              </div>
+
+              {ownerLoginError && (
+                <div className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-xs font-bold text-rose-400 flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{ownerLoginError}</span>
+                </div>
+              )}
+
+              <div className="flex justify-end gap-2.5 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowOwnerLoginModal(false)}
+                  className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 text-xs font-black"
+                >
+                  Unlock Owner Mode
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* OWNER ADD / EDIT COURT MODAL */}
       {isCourtModalOpen && (
