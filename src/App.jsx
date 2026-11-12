@@ -1044,26 +1044,26 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-lime-400 selection:text-slate-950">
-      {/* TOAST NOTIFICATION */}
+    <div className="min-h-screen w-full overflow-x-hidden bg-slate-950 text-slate-100 font-sans selection:bg-lime-400 selection:text-slate-950">
+      {/* TOAST NOTIFICATION (Responsive Full-Width on Mobile, Floating on Desktop) */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-lime-400 text-slate-950 font-semibold shadow-2xl shadow-lime-400/25 border border-lime-300 animate-bounce">
+        <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-50 flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-lime-400 text-slate-950 font-semibold shadow-2xl shadow-lime-400/25 border border-lime-300 animate-bounce max-w-md sm:w-auto mx-auto sm:mx-0">
           <CheckCircle2 className="w-5 h-5 shrink-0" />
-          <span>{toast.message}</span>
+          <span className="text-xs sm:text-sm break-words">{toast.message}</span>
         </div>
       )}
 
       {/* TOP NAVIGATION BAR */}
-      <header className="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/85 border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+      <header className="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/90 border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-h-[4.5rem] py-2.5 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
           {/* Logo */}
           <div
             onClick={() => setSelectedCourtId(null)}
-            className="flex items-center gap-3 cursor-pointer group shrink-0"
+            className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group shrink-0"
           >
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-lime-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-lime-500/20 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-lime-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-lime-500/20 group-hover:scale-105 transition-transform shrink-0">
               <svg
-                className="w-7 h-7 text-slate-950"
+                className="w-5 h-5 sm:w-7 sm:h-7 text-slate-950"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -1078,11 +1078,11 @@ export default function App() {
               </svg>
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xl font-black tracking-tight text-white">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="text-base sm:text-xl font-black tracking-tight text-white">
                   COURT<span className="text-lime-400">HUB</span>
                 </span>
-                <span className="text-[11px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-lime-400/15 text-lime-400 border border-lime-400/30">
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-1.5 sm:px-2 py-0.5 rounded-full bg-lime-400/15 text-lime-400 border border-lime-400/30">
                   Pickleball
                 </span>
                 <span className="hidden md:inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
@@ -1097,20 +1097,20 @@ export default function App() {
           </div>
 
           {/* Player Identity + Role Switcher & Owner CTA */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 flex-wrap justify-end">
             <button
               onClick={() => setIsProfileModalOpen(true)}
               title="Customize your Nickname, DUPR, Main Court & Paddle"
-              className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs transition-all"
+              className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs transition-all max-w-[240px]"
             >
-              <div className="w-6 h-6 rounded-lg bg-lime-400/20 text-lime-400 font-bold flex items-center justify-center text-[11px]">
+              <div className="w-6 h-6 rounded-lg bg-lime-400/20 text-lime-400 font-bold flex items-center justify-center text-[11px] shrink-0">
                 {playerProfile.displayName.slice(0, 2).toUpperCase()}
               </div>
-              <div className="text-left">
-                <div className="font-bold text-white leading-none">
+              <div className="text-left min-w-0">
+                <div className="font-bold text-white leading-none truncate">
                   {playerProfile.displayName}
                 </div>
-                <div className="text-[10px] text-lime-400 font-semibold mt-0.5">
+                <div className="text-[10px] text-lime-400 font-semibold mt-0.5 truncate">
                   {playerProfile.dupr} • {playerProfile.paddle}
                 </div>
               </div>
@@ -1118,40 +1118,45 @@ export default function App() {
 
             <button
               onClick={() => setShowWelcomePage(!showWelcomePage)}
-              className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 sm:px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 shrink-0 ${
                 showWelcomePage
                   ? 'bg-lime-400/20 border-lime-400 text-lime-300'
                   : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white'
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5 text-lime-400" />
+              <Sparkles className="w-3.5 h-3.5 text-lime-400 shrink-0" />
               <span className="hidden sm:inline">
                 {showWelcomePage ? 'Explore Courts' : 'Welcome Page'}
               </span>
+              <span className="sm:hidden">
+                {showWelcomePage ? 'Courts' : 'Home'}
+              </span>
             </button>
 
-            <div className="bg-slate-900 p-1 rounded-xl border border-slate-800 flex items-center">
+            <div className="bg-slate-900 p-1 rounded-xl border border-slate-800 flex items-center shrink-0">
               <button
                 onClick={() => setRole('player')}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
                   role === 'player'
                     ? 'bg-lime-400 text-slate-950 shadow-md'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                <Users className="w-4 h-4" />
-                <span>Player View</span>
+                <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline">Player View</span>
+                <span className="sm:hidden">Player</span>
               </button>
               <button
                 onClick={handleOwnerModeClick}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
                   role === 'owner'
                     ? 'bg-emerald-500 text-slate-950 shadow-md'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                <ShieldCheck className="w-4 h-4" />
-                <span>App Owner Mode</span>
+                <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline">App Owner Mode</span>
+                <span className="sm:hidden">Owner</span>
               </button>
             </div>
 
@@ -1161,59 +1166,57 @@ export default function App() {
                   setEditingCourt(null);
                   setIsCourtModalOpen(true);
                 }}
-                className="flex items-center gap-1.5 bg-gradient-to-r from-lime-400 to-emerald-400 hover:from-lime-300 hover:to-emerald-300 text-slate-950 font-bold px-3.5 py-2.5 rounded-xl shadow-lg shadow-lime-400/20 transition-all hover:scale-[1.02] active:scale-95 text-xs sm:text-sm"
+                className="flex items-center gap-1 sm:gap-1.5 bg-gradient-to-r from-lime-400 to-emerald-400 hover:from-lime-300 hover:to-emerald-300 text-slate-950 font-bold px-2.5 sm:px-3.5 py-2 sm:py-2.5 rounded-xl shadow-lg shadow-lime-400/20 transition-all hover:scale-[1.02] active:scale-95 text-xs sm:text-sm shrink-0"
               >
-                <Plus className="w-4 h-4 stroke-[2.5]" />
-                <span className="hidden sm:inline">Add Pickleball Court</span>
-                <span className="sm:hidden">Add</span>
+                <Plus className="w-4 h-4 stroke-[2.5] shrink-0" />
+                <span className="hidden md:inline">Add Pickleball Court</span>
+                <span className="md:hidden">Add</span>
               </button>
             )}
           </div>
         </div>
 
         {/* CLOUD USER BAR & OWNER MODE BANNER */}
-        <div className="bg-slate-900/90 border-t border-slate-800/80 px-4 py-1.5">
-          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400">
-            <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Connected to courthub-pickleball
+        <div className="bg-slate-900/90 border-t border-slate-800/80 px-3 sm:px-6 py-1.5">
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-3 text-[11px] text-slate-400">
+            <div className="flex items-center justify-between sm:justify-start gap-2 min-w-0">
+              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold shrink-0">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span>Connected to courthub-pickleball</span>
               </span>
               {user && (
-                <span className="font-mono text-slate-400">
-                  Player ID:{' '}
+                <span className="font-mono text-slate-400 truncate max-w-[140px] sm:max-w-none">
+                  ID:{' '}
                   <strong className="text-slate-200 select-all">
-                    {user.uid}
+                    {user.uid.slice(0, 10)}...
                   </strong>
                 </span>
               )}
             </div>
             <button
               onClick={() => setIsProfileModalOpen(true)}
-              className="text-lime-400 hover:underline font-semibold flex items-center gap-1"
+              className="text-lime-400 hover:underline font-semibold flex items-center gap-1 text-left truncate max-w-full"
             >
-              <UserCheck className="w-3.5 h-3.5" />
-              <span>
-                {playerProfile.displayName} ({playerProfile.dupr} • Main:{' '}
-                {playerProfile.mainCourt} • Paddle: {playerProfile.paddle}) —
-                Edit Registration
+              <UserCheck className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">
+                {playerProfile.displayName} ({playerProfile.dupr} •{' '}
+                {playerProfile.paddle}) — Edit Setup
               </span>
             </button>
           </div>
         </div>
 
         {role === 'owner' && (
-          <div className="bg-emerald-500/10 border-t border-emerald-500/20 px-4 py-2.5">
-            <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm text-emerald-300">
-              <div className="flex items-center gap-2">
+          <div className="bg-emerald-500/10 border-t border-emerald-500/20 px-3 sm:px-6 py-2">
+            <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-300">
+              <div className="flex items-center gap-2 min-w-0">
                 <Sparkles className="w-4 h-4 text-lime-400 shrink-0" />
-                <span>
-                  <strong>Owner Cloud Dashboard (Logged in as JAYEM):</strong>{' '}
-                  Any pickleball court you add, feature, or edit is saved
-                  permanently to the cloud for all players.
+                <span className="break-words">
+                  <strong>Owner Cloud Dashboard (JAYEM):</strong> Courts you
+                  add, feature, or edit sync live to all players.
                 </span>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 shrink-0">
                 <button
                   onClick={() => {
                     setEditingCourt(null);
@@ -1221,7 +1224,7 @@ export default function App() {
                   }}
                   className="underline font-bold text-lime-400 hover:text-lime-300"
                 >
-                  + Add a Court Now
+                  + Add Court
                 </button>
                 <button
                   onClick={handleOwnerLogout}
@@ -1236,11 +1239,11 @@ export default function App() {
       </header>
 
       {/* MAIN CONTENT VIEW SWITCHER */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8">
         {cloudLoading ? (
-          <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-12 text-center space-y-3">
+          <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-8 sm:p-12 text-center space-y-3">
             <RefreshCw className="w-8 h-8 text-lime-400 animate-spin mx-auto" />
-            <h3 className="text-lg font-bold text-white">
+            <h3 className="text-base sm:text-lg font-bold text-white">
               Syncing Pickleball Courts from Cloud...
             </h3>
             <p className="text-xs text-slate-400">
@@ -1281,25 +1284,25 @@ export default function App() {
         ) : (
           <>
             {/* HERO BANNER */}
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 border border-slate-800 p-6 sm:p-10 mb-8 shadow-2xl">
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 border border-slate-800 p-5 sm:p-8 lg:p-10 mb-6 sm:mb-8 shadow-2xl">
               <div className="absolute -right-16 -top-16 w-72 h-72 bg-lime-400/10 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute right-20 bottom-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 <div className="lg:col-span-8 space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-400/15 border border-lime-400/30 text-lime-300 text-xs font-bold uppercase tracking-wider">
-                    <Flame className="w-3.5 h-3.5 text-lime-400" />
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-400/15 border border-lime-400/30 text-lime-300 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+                    <Flame className="w-3.5 h-3.5 text-lime-400 shrink-0" />
                     <span>
-                      100% Dedicated Pickleball Court Network • Cloud Synced
+                      100% Dedicated Pickleball Network • Cloud Synced
                     </span>
                   </div>
-                  <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+                  <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
                     Find Your Next Court.{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-emerald-400">
                       Check the Paddle Stack.
                     </span>
                   </h1>
-                  <p className="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+                  <p className="text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed">
                     Explore owner-verified pickleball courts, inspect real
                     player photos of surface grit and night lighting, rate your
                     experience, and coordinate DUPR Open Play sessions in real
@@ -1307,7 +1310,7 @@ export default function App() {
                   </p>
 
                   {/* Quick Stats Bar */}
-                  <div className="pt-2 flex flex-wrap items-center gap-6 text-sm">
+                  <div className="pt-2 flex flex-wrap items-center gap-4 sm:gap-6 text-sm">
                     <div className="flex items-center gap-2.5">
                       <div className="w-9 h-9 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center justify-center text-lime-400 font-bold">
                         {courts.length}
@@ -1339,9 +1342,9 @@ export default function App() {
                     {role === 'player' ? (
                       <button
                         onClick={handleOwnerModeClick}
-                        className="text-xs font-semibold text-lime-400 hover:text-lime-300 flex items-center gap-1 bg-lime-400/10 px-3 py-2 rounded-xl border border-lime-400/20"
+                        className="text-xs font-semibold text-lime-400 hover:text-lime-300 flex items-center gap-1.5 bg-lime-400/10 px-3 py-2 rounded-xl border border-lime-400/20"
                       >
-                        <ShieldCheck className="w-4 h-4" />
+                        <ShieldCheck className="w-4 h-4 shrink-0" />
                         <span>Switch to App Owner Mode to Add Courts</span>
                       </button>
                     ) : (
@@ -1360,7 +1363,7 @@ export default function App() {
                 </div>
 
                 {/* Live Court Radar Card */}
-                <div className="lg:col-span-4 bg-slate-950/80 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
+                <div className="lg:col-span-4 bg-slate-950/80 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl">
                   <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                     <div className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-lime-400 animate-ping" />
@@ -1372,7 +1375,7 @@ export default function App() {
                       Cloud Live
                     </span>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     {courts.slice(0, 3).map((c) => {
                       const badge = getCrowdBadgeStyle(c.paddlesStacked);
                       return (
@@ -1385,7 +1388,7 @@ export default function App() {
                             <p className="text-xs font-bold text-white truncate">
                               {c.name}
                             </p>
-                            <p className="text-[11px] text-slate-400">
+                            <p className="text-[11px] text-slate-400 truncate">
                               {c.city} • {c.courtCount} Courts
                             </p>
                           </div>
@@ -1404,10 +1407,10 @@ export default function App() {
 
             {/* REGISTERED DINKERS BAR */}
             {communityPlayers.length > 0 && (
-              <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 mb-8">
-                <div className="flex items-center justify-between mb-3">
+              <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 mb-6 sm:mb-8">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                   <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-lime-400" />
+                    <Users className="w-4 h-4 text-lime-400 shrink-0" />
                     <span className="text-xs font-black uppercase tracking-wider text-white">
                       Registered Community Dinkers ({communityPlayers.length})
                     </span>
@@ -1419,25 +1422,25 @@ export default function App() {
                     + Update Your Setup
                   </button>
                 </div>
-                <div className="flex gap-3 overflow-x-auto pb-1">
+                <div className="flex gap-3 overflow-x-auto pb-2">
                   {communityPlayers.slice(0, 8).map((p) => (
                     <div
                       key={p.id}
-                      className="shrink-0 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 flex items-center gap-3"
+                      className="shrink-0 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 flex items-center gap-3 max-w-[280px]"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-lime-400/20 text-lime-300 font-black text-xs flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-lg bg-lime-400/20 text-lime-300 font-black text-xs flex items-center justify-center shrink-0">
                         {(p.displayName || 'DK').slice(0, 2).toUpperCase()}
                       </div>
-                      <div className="text-xs">
+                      <div className="text-xs min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="font-bold text-white">
+                          <span className="font-bold text-white truncate">
                             {p.displayName}
                           </span>
-                          <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">
+                          <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold shrink-0">
                             {p.dupr}
                           </span>
                         </div>
-                        <div className="text-[11px] text-slate-400">
+                        <div className="text-[11px] text-slate-400 truncate">
                           Paddle:{' '}
                           <span className="text-lime-400">{p.paddle}</span> •
                           Main:{' '}
@@ -1451,9 +1454,9 @@ export default function App() {
             )}
 
             {/* SEARCH & FILTER BAR */}
-            <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-8 space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-                <div className="md:col-span-5 relative">
+            <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-6 sm:mb-8 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
+                <div className="sm:col-span-2 lg:col-span-5 relative">
                   <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
@@ -1464,7 +1467,7 @@ export default function App() {
                   />
                 </div>
 
-                <div className="md:col-span-2">
+                <div className="lg:col-span-2">
                   <select
                     value={typeFilter}
                     onChange={(e) => setTypeFilter(e.target.value)}
@@ -1477,7 +1480,7 @@ export default function App() {
                   </select>
                 </div>
 
-                <div className="md:col-span-3">
+                <div className="lg:col-span-3">
                   <select
                     value={surfaceFilter}
                     onChange={(e) => setSurfaceFilter(e.target.value)}
@@ -1491,7 +1494,7 @@ export default function App() {
                   </select>
                 </div>
 
-                <div className="md:col-span-2">
+                <div className="sm:col-span-2 lg:col-span-2">
                   <select
                     value={feeFilter}
                     onChange={(e) => setFeeFilter(e.target.value)}
@@ -1506,7 +1509,7 @@ export default function App() {
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <span className="text-slate-400 font-medium">
                     Minimum Rating:
                   </span>
@@ -1520,7 +1523,7 @@ export default function App() {
                           : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
                       }`}
                     >
-                      {r === 0 ? 'Any Rating' : `${r}+ Stars ★`}
+                      {r === 0 ? 'Any' : `${r}+ ★`}
                     </button>
                   ))}
                 </div>
@@ -1529,21 +1532,21 @@ export default function App() {
                   <strong className="text-white">
                     {filteredCourts.length}
                   </strong>{' '}
-                  of {courts.length} Pickleball Locations
+                  of {courts.length} Locations
                 </div>
               </div>
             </div>
 
             {/* COURT CARDS GRID */}
             {filteredCourts.length === 0 ? (
-              <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-12 text-center space-y-4">
+              <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-8 sm:p-12 text-center space-y-4">
                 <div className="w-14 h-14 rounded-2xl bg-slate-800 mx-auto flex items-center justify-center text-slate-400">
                   <Compass className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-white">
+                <h3 className="text-lg sm:text-xl font-bold text-white">
                   No Pickleball Courts Match Your Filters
                 </h3>
-                <p className="text-slate-400 text-sm max-w-md mx-auto">
+                <p className="text-slate-400 text-xs sm:text-sm max-w-md mx-auto">
                   Try clearing your search filters or switch to App Owner Mode
                   to add a new court in this area.
                 </p>
@@ -1561,7 +1564,7 @@ export default function App() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                 {filteredCourts.map((court) => {
                   const stats = calculateCourtStats(court.reviews);
                   const crowdBadge = getCrowdBadgeStyle(court.paddlesStacked);
@@ -1572,7 +1575,7 @@ export default function App() {
                       onClick={() => setSelectedCourtId(court.id)}
                       className="group bg-slate-900/90 hover:bg-slate-900 border border-slate-800/90 hover:border-lime-400/50 rounded-3xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col cursor-pointer"
                     >
-                      <div className="relative h-60 overflow-hidden bg-slate-950">
+                      <div className="relative h-52 sm:h-60 overflow-hidden bg-slate-950">
                         <img
                           src={court.coverPhoto}
                           alt={court.name}
@@ -1580,25 +1583,25 @@ export default function App() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
 
-                        <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2">
-                          <div className="flex items-center gap-2">
+                        <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex flex-wrap items-center justify-between gap-1.5">
+                          <div className="flex flex-wrap items-center gap-1.5">
                             {court.featured && (
-                              <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-lime-400 text-slate-950 shadow-lg flex items-center gap-1">
-                                <Award className="w-3.5 h-3.5" /> Owner Featured
+                              <span className="px-2.5 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-lime-400 text-slate-950 shadow-lg flex items-center gap-1">
+                                <Award className="w-3 h-3 shrink-0" /> Featured
                               </span>
                             )}
-                            <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-950/85 backdrop-blur-md text-white border border-slate-700">
+                            <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-slate-950/85 backdrop-blur-md text-white border border-slate-700">
                               {court.type} • {court.courtCount} Courts
                             </span>
                           </div>
 
-                          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/90 text-slate-950 shadow-md">
+                          <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/90 text-slate-950 shadow-md">
                             {court.priceText}
                           </span>
                         </div>
 
                         {role === 'owner' && (
-                          <div className="absolute bottom-14 right-4 flex items-center gap-1.5 z-20">
+                          <div className="absolute bottom-14 right-3 sm:right-4 flex items-center gap-1.5 z-20">
                             <button
                               onClick={(e) => handleToggleFeatured(court.id, e)}
                               title="Toggle Featured Badge"
@@ -1627,47 +1630,47 @@ export default function App() {
                           </div>
                         )}
 
-                        <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between gap-2">
-                          <div>
-                            <div className="flex items-center gap-1.5 text-xs font-semibold text-lime-400 mb-0.5">
-                              <MapPin className="w-3.5 h-3.5" />
-                              <span>{court.city}</span>
+                        <div className="absolute bottom-3 left-3 sm:left-4 right-3 sm:right-4 flex items-end justify-between gap-2">
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-1 text-xs font-semibold text-lime-400 mb-0.5">
+                              <MapPin className="w-3.5 h-3.5 shrink-0" />
+                              <span className="truncate">{court.city}</span>
                             </div>
-                            <h2 className="text-xl sm:text-2xl font-black text-white group-hover:text-lime-300 transition-colors">
+                            <h2 className="text-lg sm:text-2xl font-black text-white group-hover:text-lime-300 transition-colors truncate">
                               {court.name}
                             </h2>
                           </div>
 
-                          <div className="bg-slate-950/90 backdrop-blur-md border border-slate-800 px-3 py-1.5 rounded-2xl flex items-center gap-1.5 shrink-0">
-                            <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                            <span className="font-black text-white text-sm">
+                          <div className="bg-slate-950/90 backdrop-blur-md border border-slate-800 px-2.5 sm:px-3 py-1.5 rounded-2xl flex items-center gap-1 shrink-0">
+                            <Star className="w-4 h-4 fill-amber-400 text-amber-400 shrink-0" />
+                            <span className="font-black text-white text-xs sm:text-sm">
                               {stats.count > 0 ? stats.avg : 'New'}
                             </span>
-                            <span className="text-xs text-slate-400">
+                            <span className="text-[11px] text-slate-400">
                               ({stats.count})
                             </span>
                           </div>
                         </div>
                       </div>
 
-                      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-4">
                         <div className="space-y-3">
                           <div className="flex flex-wrap items-center justify-between gap-2">
                             <div
-                              className={`inline-flex items-center gap-2 px-3 py-1 rounded-xl text-xs font-bold border ${crowdBadge.bg}`}
+                              className={`inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-xl text-[11px] sm:text-xs font-bold border ${crowdBadge.bg}`}
                             >
                               <span
-                                className={`w-2 h-2 rounded-full ${crowdBadge.dot}`}
+                                className={`w-2 h-2 rounded-full shrink-0 ${crowdBadge.dot}`}
                               />
                               <span>{crowdBadge.label}</span>
                             </div>
 
-                            <span className="text-xs font-semibold text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
+                            <span className="text-[11px] sm:text-xs font-semibold text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
                               Surface: {court.surface}
                             </span>
                           </div>
 
-                          <p className="text-sm text-slate-300 line-clamp-2 leading-relaxed">
+                          <p className="text-xs sm:text-sm text-slate-300 line-clamp-2 leading-relaxed">
                             {court.description}
                           </p>
 
@@ -1688,24 +1691,24 @@ export default function App() {
                           </div>
                         </div>
 
-                        <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3 text-xs text-slate-400">
+                        <div className="pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+                          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs text-slate-400">
                             <span className="flex items-center gap-1">
-                              <MessageSquare className="w-3.5 h-3.5 text-lime-400" />
+                              <MessageSquare className="w-3.5 h-3.5 text-lime-400 shrink-0" />
                               {(court.reviews || []).length} Reviews
                             </span>
                             <span className="flex items-center gap-1">
-                              <Camera className="w-3.5 h-3.5 text-emerald-400" />
+                              <Camera className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                               {(court.gallery || []).length} Photos
                             </span>
                             <span className="flex items-center gap-1">
-                              <Users className="w-3.5 h-3.5 text-amber-400" />
-                              {(court.lfgPosts || []).length} Open Play LFG
+                              <Users className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                              {(court.lfgPosts || []).length} LFG
                             </span>
                           </div>
 
                           <span className="inline-flex items-center gap-1 text-xs font-bold text-lime-400 group-hover:translate-x-1 transition-transform shrink-0">
-                            <span>Explore & Review</span>
+                            <span>Explore</span>
                             <ChevronRight className="w-4 h-4" />
                           </span>
                         </div>
@@ -1721,15 +1724,15 @@ export default function App() {
 
       {/* OWNER LOGIN MODAL */}
       {showOwnerLoginModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl">
+        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-5 sm:p-6 space-y-5 shadow-2xl max-h-[90dvh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-slate-800 pb-4">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black shrink-0">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-black text-white">
+                  <h2 className="text-base sm:text-lg font-black text-white">
                     App Owner Login
                   </h2>
                   <p className="text-xs text-slate-400">
@@ -1739,7 +1742,7 @@ export default function App() {
               </div>
               <button
                 onClick={() => setShowOwnerLoginModal(false)}
-                className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white"
+                className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1785,13 +1788,13 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => setShowOwnerLoginModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold"
+                  className="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 text-xs font-black"
+                  className="px-5 py-2.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 text-xs font-black"
                 >
                   Unlock Owner Mode
                 </button>
@@ -1832,14 +1835,14 @@ export default function App() {
         >
           <button
             onClick={() => setLightboxUrl(null)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-slate-900 text-white hover:bg-lime-400 hover:text-slate-950 transition-colors"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-3 rounded-full bg-slate-900 text-white hover:bg-lime-400 hover:text-slate-950 transition-colors"
           >
             <X className="w-6 h-6" />
           </button>
           <img
             src={lightboxUrl}
             alt="Pickleball Court Fullscreen"
-            className="max-w-full max-h-[85vh] rounded-2xl object-contain border border-slate-800 shadow-2xl"
+            className="max-w-full max-h-[85dvh] rounded-2xl object-contain border border-slate-800 shadow-2xl"
           />
         </div>
       )}
@@ -1909,66 +1912,66 @@ function WelcomeFrontPage({
   };
 
   return (
-    <div className="space-y-10 py-2">
+    <div className="space-y-6 sm:space-y-10 py-1 sm:py-2">
       {/* MAIN WELCOME HERO BANNER */}
-      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950 border-2 border-lime-400/30 p-8 sm:p-14 text-center shadow-2xl">
+      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950 border-2 border-lime-400/30 p-5 sm:p-10 lg:p-14 text-center shadow-2xl">
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-lime-400/15 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 max-w-4xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lime-400/15 border border-lime-400/40 text-lime-300 text-xs sm:text-sm font-black uppercase tracking-widest">
-            <Sparkles className="w-4 h-4 text-lime-400" />
+        <div className="relative z-10 max-w-4xl mx-auto space-y-5 sm:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-lime-400/15 border border-lime-400/40 text-lime-300 text-[11px] sm:text-sm font-black uppercase tracking-widest">
+            <Sparkles className="w-4 h-4 text-lime-400 shrink-0" />
             <span>
               Official Pickleball Court Community & Live Stack Network
             </span>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 drop-shadow-sm">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 drop-shadow-sm leading-none">
             WELCOME DINKERS
           </h1>
 
-          <div className="max-w-2xl mx-auto bg-slate-900/90 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-3">
-            <p className="text-base sm:text-xl font-bold text-white leading-relaxed">
+          <div className="max-w-2xl mx-auto bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-3">
+            <p className="text-sm sm:text-xl font-bold text-white leading-relaxed">
               “This is a test app — if you guys like this app, please support me
               or give a rating!”
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-300">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs text-slate-300">
               <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30 font-bold">
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 shrink-0" />
                 {avgAppRating} App Rating ({appSupportList.length || 1}{' '}
                 Supporters)
               </span>
               <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-bold">
-                <Users className="w-3.5 h-3.5" />
+                <Users className="w-3.5 h-3.5 shrink-0" />
                 {communityPlayers.length} Registered Dinkers
               </span>
             </div>
           </div>
 
-          <div className="pt-3 flex flex-wrap items-center justify-center gap-4">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={onEnterCourts}
-              className="px-8 py-4 rounded-2xl bg-gradient-to-r from-lime-400 to-emerald-400 hover:from-lime-300 hover:to-emerald-300 text-slate-950 font-black text-base sm:text-lg shadow-2xl shadow-lime-400/30 flex items-center gap-2.5 transition-all hover:scale-105 active:scale-95"
+              className="w-full sm:w-auto justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-lime-400 to-emerald-400 hover:from-lime-300 hover:to-emerald-300 text-slate-950 font-black text-sm sm:text-lg shadow-2xl shadow-lime-400/30 flex items-center gap-2.5 transition-all hover:scale-105 active:scale-95"
             >
-              <Compass className="w-6 h-6 stroke-[2.5]" />
+              <Compass className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] shrink-0" />
               <span>Enter Courts / Find Your Court</span>
-              <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+              <ChevronRight className="w-5 h-5 stroke-[2.5] shrink-0" />
             </button>
           </div>
         </div>
       </div>
 
       {/* TWO-COLUMN SECTION: PLAYER REGISTRATION + APP SUPPORT & RATINGS */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+        <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-8 shadow-2xl space-y-5 sm:space-y-6">
           <div className="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-lime-400 text-slate-950 flex items-center justify-center font-black shadow-lg shadow-lime-400/20">
-                <UserCheck className="w-6 h-6" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-lime-400 text-slate-950 flex items-center justify-center font-black shadow-lg shadow-lime-400/20 shrink-0">
+                <UserCheck className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-xl sm:text-2xl font-black text-white">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h2 className="text-lg sm:text-2xl font-black text-white">
                     Quick Dinker Registration
                   </h2>
                   {playerProfile?.registered && (
@@ -2069,31 +2072,31 @@ function WelcomeFrontPage({
               </div>
             </div>
 
-            <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+            <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="text-xs text-slate-400">
                 Your setup badge will appear on your court reviews & Open Play
                 check-ins!
               </div>
               <button
                 type="submit"
-                className="px-6 py-3.5 rounded-2xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-sm shadow-lg shadow-lime-400/20 flex items-center gap-2 transition-all"
+                className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-2xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-sm shadow-lg shadow-lime-400/20 flex items-center gap-2 transition-all shrink-0"
               >
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
                 <span>Register Dinker & Enter Courts</span>
               </button>
             </div>
           </form>
         </div>
 
-        <div className="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-8 shadow-2xl flex flex-col justify-between space-y-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-4">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
                   <Star className="w-5 h-5 fill-amber-400" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-black text-white">
+                  <h3 className="text-base sm:text-lg font-black text-white">
                     Support & Rate This Test App
                   </h3>
                   <p className="text-xs text-slate-400">
@@ -2108,7 +2111,7 @@ function WelcomeFrontPage({
                 <label className="text-xs font-bold text-slate-300 block mb-1.5">
                   Tap Stars to Rate This App:
                 </label>
-                <div className="flex items-center gap-1.5">
+                <div className="flex flex-wrap items-center gap-1.5">
                   {[1, 2, 3, 4, 5].map((st) => (
                     <button
                       key={st}
@@ -2170,13 +2173,15 @@ function WelcomeFrontPage({
                     key={sup.id}
                     className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-1"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-white">{sup.author}</span>
-                      <span className="text-amber-400 font-black">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-bold text-white truncate">
+                        {sup.author}
+                      </span>
+                      <span className="text-amber-400 font-black shrink-0">
                         {'★'.repeat(sup.stars || 5)}
                       </span>
                     </div>
-                    <p className="text-slate-300">{sup.message}</p>
+                    <p className="text-slate-300 break-words">{sup.message}</p>
                   </div>
                 ))
               )}
@@ -2186,11 +2191,11 @@ function WelcomeFrontPage({
       </div>
 
       {/* REGISTERED DINKERS SHOWCASE */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-8 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="text-lg font-black text-white flex items-center gap-2">
-              <Users className="w-5 h-5 text-lime-400" />
+            <h3 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+              <Users className="w-5 h-5 text-lime-400 shrink-0" />
               <span>Registered Dinkers Roster ({communityPlayers.length})</span>
             </h3>
             <p className="text-xs text-slate-400">
@@ -2200,7 +2205,7 @@ function WelcomeFrontPage({
           </div>
           <button
             onClick={onEnterCourts}
-            className="px-4 py-2 rounded-xl bg-lime-400 text-slate-950 font-black text-xs hover:bg-lime-300"
+            className="px-4 py-2 rounded-xl bg-lime-400 text-slate-950 font-black text-xs hover:bg-lime-300 shrink-0"
           >
             Find Your Court →
           </button>
@@ -2391,89 +2396,89 @@ function CourtDetailView({
   }, [court.reviews, reviewFilter]);
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 text-sm font-bold transition-all"
+          className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 text-xs sm:text-sm font-bold transition-all"
         >
-          <ArrowLeft className="w-4 h-4 text-lime-400" />
-          <span>Back to All Pickleball Courts</span>
+          <ArrowLeft className="w-4 h-4 text-lime-400 shrink-0" />
+          <span>Back to All Courts</span>
         </button>
 
         {role === 'owner' && (
           <button
             onClick={onEditCourt}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-sm shadow-lg"
+            className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-2xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-xs sm:text-sm shadow-lg"
           >
-            <Edit3 className="w-4 h-4" />
+            <Edit3 className="w-4 h-4 shrink-0" />
             <span>Owner: Edit Court Specs</span>
           </button>
         )}
       </div>
 
       <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
-        <div className="relative h-72 sm:h-96 bg-slate-950">
+        <div className="relative h-64 sm:h-80 lg:h-96 bg-slate-950">
           <img
             src={court.coverPhoto}
             alt={court.name}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-transparent" />
 
-          <div className="absolute top-5 left-5 right-5 flex flex-wrap items-center justify-between gap-2">
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="absolute top-3 sm:top-5 left-3 sm:left-5 right-3 sm:right-5 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               {court.featured && (
-                <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-lime-400 text-slate-950 flex items-center gap-1.5">
-                  <Award className="w-4 h-4" /> Owner Verified Hub
+                <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-black uppercase tracking-wider bg-lime-400 text-slate-950 flex items-center gap-1">
+                  <Award className="w-3.5 h-3.5 shrink-0" /> Verified Hub
                 </span>
               )}
-              <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-950/85 backdrop-blur-md text-white border border-slate-700">
-                {court.type} • {court.courtCount} Pickleball Courts
+              <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-slate-950/85 backdrop-blur-md text-white border border-slate-700">
+                {court.type} • {court.courtCount} Courts
               </span>
-              <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-950/85 backdrop-blur-md text-lime-400 border border-slate-700">
+              <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-slate-950/85 backdrop-blur-md text-lime-400 border border-slate-700">
                 {court.surface}
               </span>
             </div>
 
-            <span className="px-4 py-1.5 rounded-full text-xs font-black bg-emerald-400 text-slate-950">
+            <span className="px-3.5 py-1 rounded-full text-[11px] sm:text-xs font-black bg-emerald-400 text-slate-950">
               {court.priceText}
             </span>
           </div>
 
-          <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-end justify-between gap-4">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-lime-400 text-sm font-bold">
-                <MapPin className="w-4 h-4" />
-                <span>{court.address || court.city}</span>
+          <div className="absolute bottom-3 sm:bottom-5 left-3 sm:left-5 right-3 sm:right-5 flex flex-wrap items-end justify-between gap-3">
+            <div className="space-y-1 min-w-0 flex-1">
+              <div className="flex items-center gap-1.5 text-lime-400 text-xs sm:text-sm font-bold">
+                <MapPin className="w-4 h-4 shrink-0" />
+                <span className="truncate">{court.address || court.city}</span>
               </div>
-              <h1 className="text-2xl sm:text-4xl font-black text-white">
+              <h1 className="text-xl sm:text-3xl lg:text-4xl font-black text-white leading-tight break-words">
                 {court.name}
               </h1>
             </div>
 
-            <div className="bg-slate-950/90 backdrop-blur-md border border-slate-800 p-4 rounded-2xl flex items-center gap-3">
+            <div className="bg-slate-950/90 backdrop-blur-md border border-slate-800 px-3.5 py-2.5 sm:p-4 rounded-2xl flex items-center gap-3 shrink-0">
               <div className="text-center">
-                <div className="flex items-center gap-1 text-2xl font-black text-white">
-                  <Star className="w-6 h-6 fill-amber-400 text-amber-400" />
+                <div className="flex items-center gap-1 text-lg sm:text-2xl font-black text-white">
+                  <Star className="w-5 h-5 sm:w-6 sm:h-6 fill-amber-400 text-amber-400 shrink-0" />
                   <span>{stats.count > 0 ? stats.avg : 'New'}</span>
                 </div>
-                <div className="text-[11px] text-slate-400">
-                  {stats.count} Player Reviews
+                <div className="text-[10px] sm:text-[11px] text-slate-400">
+                  {stats.count} Reviews
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="p-6 bg-slate-900/95 border-t border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div className="p-4 sm:p-6 bg-slate-900/95 border-t border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-center">
           <div className="lg:col-span-7 space-y-2">
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <span
-                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold border ${crowdBadge.bg}`}
+                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold border ${crowdBadge.bg}`}
               >
                 <span
-                  className={`w-2.5 h-2.5 rounded-full ${crowdBadge.dot} animate-pulse`}
+                  className={`w-2.5 h-2.5 rounded-full shrink-0 ${crowdBadge.dot} animate-pulse`}
                 />
                 <span>{crowdBadge.label}</span>
               </span>
@@ -2481,19 +2486,21 @@ function CourtDetailView({
                 {court.lastCheckIn}
               </span>
             </div>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               {court.description}
             </p>
           </div>
 
           <div className="lg:col-span-5 bg-slate-950 border border-slate-800 rounded-2xl p-4 space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-1">
               <span className="text-xs font-black uppercase tracking-wider text-lime-400">
-                At the Court? Update Live Paddle Stack:
+                At the Court? Update Stack:
               </span>
-              <span className="text-xs text-slate-400">{court.windIndex}</span>
+              <span className="text-[11px] text-slate-400">
+                {court.windIndex}
+              </span>
             </div>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[0, 4, 8, 14].map((cnt) => (
                 <button
                   key={cnt}
@@ -2504,7 +2511,7 @@ function CourtDetailView({
                       : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-lime-400/50'
                   }`}
                 >
-                  {cnt === 0 ? '0 (Wide Open)' : `${cnt} Stacked`}
+                  {cnt === 0 ? '0 (Open)' : `${cnt} Stacked`}
                 </button>
               ))}
             </div>
@@ -2512,19 +2519,19 @@ function CourtDetailView({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
         <div className="lg:col-span-8 space-y-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-lg font-black text-white flex items-center gap-2">
-                <SlidersHorizontal className="w-5 h-5 text-lime-400" />
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h3 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+                <SlidersHorizontal className="w-5 h-5 text-lime-400 shrink-0" />
                 <span>Pickleball-Specific Rating Breakdown</span>
               </h3>
               <button
                 onClick={() => setShowReviewForm(!showReviewForm)}
-                className="px-4 py-2 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-lg shadow-lime-400/20"
+                className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-lg shadow-lime-400/20"
               >
-                <Plus className="w-4 h-4 stroke-[2.5]" />
+                <Plus className="w-4 h-4 stroke-[2.5] shrink-0" />
                 <span>
                   {showReviewForm
                     ? 'Close Review Form'
@@ -2542,11 +2549,13 @@ function CourtDetailView({
               ].map((m) => (
                 <div
                   key={m.label}
-                  className="bg-slate-950 border border-slate-800 rounded-2xl p-3.5"
+                  className="bg-slate-950 border border-slate-800 rounded-2xl p-3 sm:p-3.5"
                 >
-                  <div className="text-xs text-slate-400">{m.label}</div>
+                  <div className="text-[11px] sm:text-xs text-slate-400">
+                    {m.label}
+                  </div>
                   <div className="mt-1 flex items-center justify-between">
-                    <span className="text-xl font-black text-white">
+                    <span className="text-lg sm:text-xl font-black text-white">
                       {m.score}
                     </span>
                     <span className="text-xs font-bold text-lime-400">
@@ -2561,10 +2570,10 @@ function CourtDetailView({
           {showReviewForm && (
             <form
               onSubmit={handleSubmitReview}
-              className="bg-slate-900 border-2 border-lime-400/40 rounded-3xl p-6 space-y-5 shadow-2xl"
+              className="bg-slate-900 border-2 border-lime-400/40 rounded-3xl p-5 sm:p-6 space-y-5 shadow-2xl"
             >
               <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h4 className="text-base font-black text-white">
+                <h4 className="text-sm sm:text-base font-black text-white">
                   Share Your Court Experience & Upload Photos
                 </h4>
                 <button
@@ -2685,7 +2694,7 @@ function CourtDetailView({
                   <label className="text-xs font-bold text-slate-300">
                     Add Court Photos (Upload from device or 1-click sample)
                   </label>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
@@ -2708,7 +2717,7 @@ function CourtDetailView({
                       }
                       className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200"
                     >
-                      + Sample Court Photo
+                      + Sample Photo
                     </button>
                     <input
                       ref={fileInputRef}
@@ -2769,19 +2778,19 @@ function CourtDetailView({
           )}
 
           {(court.gallery || []).length > 0 && (
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-base font-black text-white flex items-center gap-2">
-                  <Camera className="w-5 h-5 text-lime-400" />
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className="text-sm sm:text-base font-black text-white flex items-center gap-2">
+                  <Camera className="w-5 h-5 text-lime-400 shrink-0" />
                   <span>
                     Player & Owner Court Photos ({(court.gallery || []).length})
                   </span>
                 </h3>
                 <span className="text-xs text-slate-400">
-                  Click any photo to enlarge
+                  Tap any photo to enlarge
                 </span>
               </div>
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {(court.gallery || []).map((imgUrl, index) => (
                   <div
                     key={index}
@@ -2801,13 +2810,13 @@ function CourtDetailView({
 
           <div className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-lg font-black text-white flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-lime-400" />
+              <h3 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+                <MessageSquare className="w-5 h-5 text-lime-400 shrink-0" />
                 <span>
-                  Player Reviews & Court Discussions ({filteredReviews.length})
+                  Player Reviews & Discussions ({filteredReviews.length})
                 </span>
               </h3>
-              <div className="flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center gap-1.5">
                 {[
                   { id: 'all', label: 'All Reviews' },
                   { id: 'photos', label: 'With Photos' },
@@ -2842,48 +2851,48 @@ function CourtDetailView({
               filteredReviews.map((rev) => (
                 <div
                   key={rev.id}
-                  className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4"
+                  className="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-4"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-2xl bg-lime-400/20 border border-lime-400/40 text-lime-300 font-black flex items-center justify-center">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-lime-400/20 border border-lime-400/40 text-lime-300 font-black flex items-center justify-center shrink-0">
                         {rev.avatar || 'PB'}
                       </div>
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="font-bold text-white text-sm">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                          <span className="font-bold text-white text-sm truncate">
                             {rev.author}
                           </span>
-                          <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">
+                          <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[10px] sm:text-[11px] font-bold">
                             {rev.dupr || '3.75 DUPR'}
                           </span>
                           {rev.paddle && (
-                            <span className="px-2 py-0.5 rounded-md bg-lime-400/15 text-lime-300 text-[11px] font-semibold">
+                            <span className="px-2 py-0.5 rounded-md bg-lime-400/15 text-lime-300 text-[10px] sm:text-[11px] font-semibold truncate max-w-[180px] sm:max-w-none">
                               Paddle: {rev.paddle}
                             </span>
                           )}
                         </div>
-                        <div className="text-xs text-slate-400">
+                        <div className="text-xs text-slate-400 truncate">
                           {rev.date}
                           {rev.mainCourt ? ` • Mains at ${rev.mainCourt}` : ''}
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
-                      <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                      <span className="font-black text-white text-sm">
+                    <div className="flex items-center gap-1 bg-slate-950 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-800 shrink-0">
+                      <Star className="w-4 h-4 fill-amber-400 text-amber-400 shrink-0" />
+                      <span className="font-black text-white text-xs sm:text-sm">
                         {rev.rating}.0
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-sm text-slate-200 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed break-words">
                     {rev.comment}
                   </p>
 
                   {rev.metrics && (
-                    <div className="flex flex-wrap gap-2 text-[11px]">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 text-[11px]">
                       <span className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
                         Surface:{' '}
                         <strong className="text-lime-400">
@@ -2919,7 +2928,7 @@ function CourtDetailView({
                           src={pUrl}
                           alt="Player review"
                           onClick={() => onOpenLightbox(pUrl)}
-                          className="w-28 h-20 object-cover rounded-xl border border-slate-700 cursor-pointer hover:border-lime-400 transition-colors"
+                          className="w-24 sm:w-28 h-20 object-cover rounded-xl border border-slate-700 cursor-pointer hover:border-lime-400 transition-colors"
                         />
                       ))}
                     </div>
@@ -2936,13 +2945,13 @@ function CourtDetailView({
                         return (
                           <button
                             onClick={() => onToggleLikeReview(court.id, rev.id)}
-                            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${
+                            className={`inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${
                               isLiked
                                 ? 'bg-lime-400/20 border-lime-400 text-lime-300'
                                 : 'bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700'
                             }`}
                           >
-                            <ThumbsUp className="w-3.5 h-3.5" />
+                            <ThumbsUp className="w-3.5 h-3.5 shrink-0" />
                             <span>Helpful Dink ({rev.likes || 0})</span>
                           </button>
                         );
@@ -2957,61 +2966,68 @@ function CourtDetailView({
                     </div>
 
                     {(rev.replies || []).length > 0 && (
-                      <div className="pl-4 border-l-2 border-slate-800 space-y-2.5">
+                      <div className="pl-3 sm:pl-4 border-l-2 border-slate-800 space-y-2.5">
                         {rev.replies.map((rep) => (
                           <div
                             key={rep.id}
                             className="bg-slate-950/90 p-3 rounded-xl text-xs"
                           >
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="font-bold text-lime-400">
+                            <div className="flex items-center justify-between mb-1 gap-2">
+                              <span className="font-bold text-lime-400 truncate">
                                 {rep.author}
                               </span>
-                              <span className="text-[10px] text-slate-500">
+                              <span className="text-[10px] text-slate-500 shrink-0">
                                 {rep.time}
                               </span>
                             </div>
-                            <p className="text-slate-300">{rep.text}</p>
+                            <p className="text-slate-300 break-words">
+                              {rep.text}
+                            </p>
                           </div>
                         ))}
                       </div>
                     )}
 
-                    <div className="flex items-center gap-2 pt-1">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1">
                       <input
                         type="text"
                         value={replyAuthor}
                         onChange={(e) => setReplyAuthor(e.target.value)}
                         placeholder="Your handle"
-                        className="w-28 sm:w-36 px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:outline-none focus:border-lime-400"
+                        className="w-full sm:w-32 px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:outline-none focus:border-lime-400"
                       />
-                      <input
-                        type="text"
-                        value={replyTexts[rev.id] || ''}
-                        onChange={(e) =>
-                          setReplyTexts((prev) => ({
-                            ...prev,
-                            [rev.id]: e.target.value,
-                          }))
-                        }
-                        placeholder="Reply or ask a question about this review..."
-                        className="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:outline-none focus:border-lime-400"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          onAddReply(
-                            court.id,
-                            rev.id,
-                            replyAuthor,
-                            replyTexts[rev.id] || ''
-                          );
-                          setReplyTexts((prev) => ({ ...prev, [rev.id]: '' }));
-                        }}
-                        className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-lime-400 hover:text-slate-950 text-xs font-bold text-slate-200 transition-colors shrink-0"
-                      >
-                        Reply
-                      </button>
+                      <div className="flex items-center gap-2 flex-1">
+                        <input
+                          type="text"
+                          value={replyTexts[rev.id] || ''}
+                          onChange={(e) =>
+                            setReplyTexts((prev) => ({
+                              ...prev,
+                              [rev.id]: e.target.value,
+                            }))
+                          }
+                          placeholder="Reply or ask about this review..."
+                          className="flex-1 min-w-0 px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:outline-none focus:border-lime-400"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onAddReply(
+                              court.id,
+                              rev.id,
+                              replyAuthor,
+                              replyTexts[rev.id] || ''
+                            );
+                            setReplyTexts((prev) => ({
+                              ...prev,
+                              [rev.id]: '',
+                            }));
+                          }}
+                          className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-lime-400 hover:text-slate-950 text-xs font-bold text-slate-200 transition-colors shrink-0"
+                        >
+                          Reply
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3021,12 +3037,12 @@ function CourtDetailView({
         </div>
 
         <div className="lg:col-span-4 space-y-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
             <h3 className="text-base font-black text-white flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-lime-400" />
+              <CheckCircle2 className="w-5 h-5 text-lime-400 shrink-0" />
               <span>Verified Court Amenities</span>
             </h3>
-            <div className="grid grid-cols-1 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
               {(court.amenities || []).map((amen) => (
                 <div
                   key={amen}
@@ -3039,14 +3055,14 @@ function CourtDetailView({
             </div>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
             <div>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-2">
                 <h3 className="text-base font-black text-white flex items-center gap-2">
-                  <Users className="w-5 h-5 text-lime-400" />
+                  <Users className="w-5 h-5 text-lime-400 shrink-0" />
                   <span>Open Play Meetups (LFG)</span>
                 </h3>
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-lime-400/15 text-lime-400">
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-lime-400/15 text-lime-400 shrink-0">
                   Live Cloud Board
                 </span>
               </div>
@@ -3060,14 +3076,14 @@ function CourtDetailView({
               onSubmit={handleCreateLfg}
               className="space-y-2.5 bg-slate-950 p-3.5 rounded-2xl border border-slate-800"
             >
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <input
                   type="text"
                   required
                   value={lfgPlayer}
                   onChange={(e) => setLfgPlayer(e.target.value)}
                   placeholder="Your Name"
-                  className="px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-white"
+                  className="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-white"
                 />
                 <input
                   type="text"
@@ -3075,7 +3091,7 @@ function CourtDetailView({
                   value={lfgDupr}
                   onChange={(e) => setLfgDupr(e.target.value)}
                   placeholder="DUPR (e.g. 3.75)"
-                  className="px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-white"
+                  className="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-white"
                 />
               </div>
               <input
@@ -3096,7 +3112,7 @@ function CourtDetailView({
               />
               <button
                 type="submit"
-                className="w-full py-2 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-xs transition-colors"
+                className="w-full py-2.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-xs transition-colors"
               >
                 + Post Open Play Session
               </button>
@@ -3119,19 +3135,21 @@ function CourtDetailView({
                       key={post.id}
                       className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2"
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-xs text-white">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-bold text-xs text-white truncate">
                           {post.player}
                         </span>
-                        <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">
+                        <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[11px] font-bold shrink-0">
                           DUPR {post.dupr}
                         </span>
                       </div>
                       <div className="text-xs text-lime-400 font-semibold flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
+                        <Clock className="w-3.5 h-3.5 shrink-0" />
                         <span>{post.time}</span>
                       </div>
-                      <p className="text-xs text-slate-300">{post.note}</p>
+                      <p className="text-xs text-slate-300 break-words">
+                        {post.note}
+                      </p>
                       <div className="flex items-center justify-between pt-1">
                         <span className="text-[11px] text-slate-400">
                           {post.joined} Players In
@@ -3191,15 +3209,15 @@ function PlayerProfileModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl">
+    <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-5 sm:p-6 space-y-5 shadow-2xl max-h-[90dvh] overflow-y-auto">
         <div className="flex items-center justify-between border-b border-slate-800 pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-xl bg-lime-400 text-slate-950 flex items-center justify-center font-black">
+            <div className="w-10 h-10 rounded-xl bg-lime-400 text-slate-950 flex items-center justify-center font-black shrink-0">
               <UserCheck className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-black text-white">
+              <h2 className="text-base sm:text-lg font-black text-white">
                 Dinker Registration & Gear
               </h2>
               <p className="text-xs text-slate-400">
@@ -3209,7 +3227,7 @@ function PlayerProfileModal({
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white"
+            className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white shrink-0"
           >
             <X className="w-4 h-4" />
           </button>
@@ -3292,13 +3310,13 @@ function PlayerProfileModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold"
+              className="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 text-xs font-black"
+              className="px-5 py-2.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 text-xs font-black"
             >
               Save Registration
             </button>
@@ -3380,15 +3398,15 @@ function OwnerCourtModal({ initialData, onClose, onSave }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl my-8 max-h-[92vh] overflow-y-auto space-y-6">
+    <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-5 sm:p-8 shadow-2xl my-4 sm:my-8 max-h-[90dvh] overflow-y-auto space-y-5 sm:space-y-6">
         <div className="flex items-center justify-between border-b border-slate-800 pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-xl bg-lime-400 text-slate-950 flex items-center justify-center font-black">
+            <div className="w-10 h-10 rounded-xl bg-lime-400 text-slate-950 flex items-center justify-center font-black shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-xl font-black text-white">
+              <h2 className="text-lg sm:text-xl font-black text-white">
                 {initialData
                   ? 'Edit Pickleball Court'
                   : 'Owner: Add New Pickleball Court'}
@@ -3401,7 +3419,7 @@ function OwnerCourtModal({ initialData, onClose, onSave }) {
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white"
+            className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -3535,7 +3553,7 @@ function OwnerCourtModal({ initialData, onClose, onSave }) {
             <label className="text-xs font-bold text-slate-300 block mb-2">
               Pickleball Amenities (Select all that apply)
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
               {ALL_AMENITIES.map((item) => {
                 const active = amenities.includes(item);
                 return (
@@ -3562,7 +3580,7 @@ function OwnerCourtModal({ initialData, onClose, onSave }) {
           </div>
 
           <div className="space-y-2.5">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <label className="text-xs font-bold text-slate-300">
                 Court Cover Photo (Pick preset or upload custom image)
               </label>
@@ -3582,7 +3600,7 @@ function OwnerCourtModal({ initialData, onClose, onSave }) {
               />
             </div>
 
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
               {PRESET_COURT_PHOTOS.map((preset, idx) => (
                 <div
                   key={idx}
@@ -3608,24 +3626,24 @@ function OwnerCourtModal({ initialData, onClose, onSave }) {
               type="checkbox"
               checked={featured}
               onChange={(e) => setFeatured(e.target.checked)}
-              className="w-4 h-4 accent-lime-400 rounded"
+              className="w-4 h-4 accent-lime-400 rounded shrink-0"
             />
             <span className="text-xs font-bold text-slate-300">
               Mark as "Owner Featured" Premier Pickleball Hub
             </span>
           </label>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-2.5 sm:gap-3 pt-4 border-t border-slate-800">
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-semibold text-sm"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-semibold text-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-sm shadow-lg shadow-lime-400/20"
+              className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-sm shadow-lg shadow-lime-400/20"
             >
               {initialData ? 'Save Changes' : 'Publish Pickleball Court'}
             </button>
